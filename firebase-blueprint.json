@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "FormattingHistory": {
+      "title": "Formatting History",
+      "description": "Records of text formatting operations",
+      "type": "object",
+      "properties": {
+        "originalText": { "type": "string" },
+        "formattedText": { "type": "string" },
+        "mode": { "type": "string", "enum": ["light", "standard", "deep"] },
+        "style": { "type": "string", "enum": ["article", "blog", "product", "faq", "neutral"] },
+        "preserveWording": { "type": "boolean" },
+        "webReadable": { "type": "boolean" },
+        "autoHeadings": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string" }
+      },
+      "required": ["originalText", "formattedText", "mode", "style", "createdAt", "userId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents"
+    },
+    "/formatting_history/{historyId}": {
+      "schema": "FormattingHistory",
+      "description": "History of formatted text for users"
+    }
+  }
+}
